@@ -1,5 +1,23 @@
 import mapboxgl from 'mapbox-gl';
 
+const createItinerary = (map, itinerary, colors, i) => {
+  map.addSource(`route${i}`, JSON.parse(itinerary));
+
+  map.addLayer({
+    'id': `route${i}`,
+    'type': 'line',
+    'source': `route${i}`,
+    'layout': {
+      'line-join': 'round',
+      'line-cap': 'round'
+    },
+    'paint': {
+      'line-color': colors[i],
+      'line-width': 4
+    }
+  });
+};
+
 const initMapbox = () => {
   const mapElement = document.getElementById('map');
 
@@ -17,21 +35,7 @@ const initMapbox = () => {
     map.on('load', function () {
       let i = 0;
       itineraries.forEach((itinerary) => {
-        map.addSource(`route${i}`, JSON.parse(itinerary));
-
-        map.addLayer({
-          'id': `route${i}`,
-          'type': 'line',
-          'source': `route${i}`,
-          'layout': {
-            'line-join': 'round',
-            'line-cap': 'round'
-          },
-          'paint': {
-            'line-color': colors[i],
-            'line-width': 8
-          }
-        });
+        createItinerary(map, itinerary, colors, i);
         i += 1;
       });
     });
