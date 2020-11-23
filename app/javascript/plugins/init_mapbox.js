@@ -7,7 +7,33 @@ const initMapbox = () => {
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v10'
+      style: 'mapbox://styles/mapbox/streets-v10',
+      center: [-122.486052, 37.830348],
+      zoom: 15
+    });
+
+    const itineraries = JSON.parse(mapElement.dataset.itineraries);
+    const colors = JSON.parse(mapElement.dataset.colors);
+    map.on('load', function () {
+      let i = 0;
+      itineraries.forEach((itinerary) => {
+        map.addSource(`route${i}`, JSON.parse(itinerary));
+
+        map.addLayer({
+          'id': `route${i}`,
+          'type': 'line',
+          'source': `route${i}`,
+          'layout': {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          'paint': {
+            'line-color': colors[i],
+            'line-width': 8
+          }
+        });
+        i += 1;
+      });
     });
   }
 };
