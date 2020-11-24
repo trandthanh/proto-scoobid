@@ -33,7 +33,13 @@ import { initMapboxCreate } from '../plugins/init_mapbox_create';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
-  initMapbox();
-  // initMapboxShow();
-  initMapboxCreate();
+  if (document.querySelector("#map")) {
+    initMapbox();
+  }
+  if (document.querySelector("#map-show")) {
+    initMapboxShow();
+  }
+  if (document.querySelector("#map-create")) {
+    initMapboxCreate();
+  }
 });

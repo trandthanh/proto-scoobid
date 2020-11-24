@@ -29,7 +29,6 @@ const initMapbox = () => {
       zoom: 15
     });
 
-    console.log(JSON.parse(mapElement.dataset.itineraries));
     const itineraries = JSON.parse(mapElement.dataset.itineraries);
     const colors = JSON.parse(mapElement.dataset.colors);
     map.on('load', function () {
