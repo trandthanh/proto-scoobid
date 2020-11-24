@@ -7,7 +7,9 @@
     <hr>
 
     <% @my_search_attendancies.each do |attendancy| %>
-      <%= link_to attendancy.start_at, search_attendancy_path(attendancy) %>
+      <div>
+        <%= link_to attendancy.start_at, search_attendancy_path(attendancy) %>
+      </div>
     <% end %>
   <% end %>
 <% end %>

@@ -1,1 +1,6 @@
-<div id="map-show" style="width: 100%; height: 100vh;" data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+<div id="map-show"
+     style="width: 100%; height: 100vh;"
+     data-itinerary="<%= @search_attendancy.itinerary %>"
+     data-color="<%= @search_attendancy.color %>"
+     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>

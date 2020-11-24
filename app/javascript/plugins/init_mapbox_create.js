@@ -4,6 +4,7 @@ const initMapboxCreate = () => {
   const mapElement = document.querySelector("#map-create");
 
   const userCoordinates = [];
+  let runInterval = null;
 
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((data) => {
@@ -23,7 +24,7 @@ const initMapboxCreate = () => {
         'properties': {},
         'geometry': {
           'type': 'LineString',
-          'coordinates': ${userCoordinates}
+          'coordinates': ${JSON.stringify(userCoordinates)}
         }
       }
     }`
@@ -31,10 +32,8 @@ const initMapboxCreate = () => {
     const mapElement = document.querySelector("#map-create");
     const id = mapElement.dataset.id;
 
-    console.log(`/search_attendancies/${id}`);
-
     if (userCoordinates.length !== 0) {
-      fetchWithToken(`/search_attendancies/${id}`, {
+      fetchWithToken(`/api/v1/search_attendancies/${id}`, {
         method: "PUT",
         headers: {
           "Accept": "application/json",
@@ -44,15 +43,21 @@ const initMapboxCreate = () => {
       })
         .then(response => response.json())
         .then((data) => {
-          // handle JSON response from server
+          console.log(data);
         });
     }
 
   }
 
-  if (mapElement) {
-    setInterval(() => getCurrentLocation(), 3000);
-  }
+  const startButton = document.querySelector(".start-button");
+  startButton.addEventListener("click", () => {
+    runInterval = setInterval(getCurrentLocation, 1000);
+  })
+
+  const stopButton = document.querySelector(".stop-button");
+  stopButton.addEventListener("click", () => {
+    clearInterval(runInterval);
+  })
 }
 
 export { initMapboxCreate };
