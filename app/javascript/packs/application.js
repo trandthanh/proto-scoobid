@@ -28,10 +28,12 @@ import "bootstrap";
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 import { initMapbox } from '../plugins/init_mapbox';
-import { collectCoordinates } from '../components/coordinates';
+import { initMapboxShow } from '../plugins/init_mapbox_show';
+import { initMapboxCreate } from '../plugins/init_mapbox_create';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
-  collectCoordinates();
   initMapbox();
+  // initMapboxShow();
+  initMapboxCreate();
 });

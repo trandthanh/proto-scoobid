@@ -1,6 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :home ]
-
   def home
+    @my_search_attendancies = current_user.search_attendancies
   end
 end

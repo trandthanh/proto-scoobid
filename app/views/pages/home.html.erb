@@ -1,2 +1,13 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<% if current_user %>
+  <%= link_to "create an itinerary", new_search_attendancy_path, class: "btn btn-primary" %>
+
+  <% unless @my_search_attendancies.empty? %>
+    <%= link_to "index", search_attendancies_path, class: "btn btn-primary" %>
+
+    <hr>
+
+    <% @my_search_attendancies.each do |attendancy| %>
+      <%= link_to attendancy.start_at, search_attendancy_path(attendancy) %>
+    <% end %>
+  <% end %>
+<% end %>
