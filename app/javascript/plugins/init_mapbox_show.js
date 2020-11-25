@@ -32,9 +32,7 @@ const initMapboxShow = () => {
     const itinerary = JSON.parse(mapElement.dataset.itinerary);
 
     map.on('load', function () {
-      console.log(itinerary);
       const coordinates = itinerary.features[0].geometry.coordinates;
-      console.log(coordinates);
       itinerary.features[0].geometry.coordinates = [coordinates[0]];
 
       map.addSource('trace', { type: 'geojson', data: itinerary });
