@@ -1,1 +1,1 @@
-json.extract! @search_attendancy, :id, :start_at, :itinerary
+json.extract! @search_attendancy, :id, :itinerary
